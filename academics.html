@@ -25,7 +25,7 @@
   <div id="preloader"><div class="spinner"></div></div>
 
   <!-- Header -->
-  <header>
+  <header class="notranslate">
     <a href="index.html" class="logo"><i class="fa-solid fa-graduation-cap"></i>Danfer<span>School</span></a>
     <nav>
       <ul class="nav-links">
@@ -40,13 +40,14 @@
       </ul>
     </nav>
     <div class="nav-actions">
+      <div id="google_translate_element" class="custom-translate"></div>
       <a href="admissions.html" class="btn btn-primary">Apply Now</a>
     </div>
     <button id="menuToggle" class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
   </header>
 
   <!-- Mobile Menu -->
-  <div id="mobileMenu" class="mobile-menu">
+  <div id="mobileMenu" class="mobile-menu notranslate">
     <button id="closeMenu" class="close-menu"><i class="fa-solid fa-xmark"></i></button>
     <ul>
       <li><a href="index.html">Home</a></li>
@@ -60,6 +61,8 @@
     </ul>
   </div>
   <div id="mobileOverlay" class="mobile-overlay" aria-hidden="true"></div>
+
+  <div class="translate-content">
 
   <!-- Page Header -->
   <div class="page-header" style="background: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=1920') center/cover;">
@@ -175,7 +178,20 @@
     </div>
   </footer>
 
+  </div>
+
   <button id="backToTop" class="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></button>
   <script src="js/script.js"></script>
+
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,am,om',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
