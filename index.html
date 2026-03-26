@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danfer School | Nurturing Excellence</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .hero-modern { padding: 140px 5% 80px; text-align: center; position: relative; overflow: hidden; background-color: var(--bg-main); z-index: 1; }
+    .hero-glow { position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 80vw; height: 80vh; background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, rgba(15,23,42,0) 65%); border-radius: 50%; pointer-events: none; z-index: -1; }
+    [data-theme="light"] .hero-glow { background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, rgba(248,250,252,0) 65%); }
+    .hero-content { position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; }
+    .hero-title { font-size: 5rem; font-family: 'Playfair Display', serif; line-height: 1.1; margin-bottom: 25px; font-weight: 800; letter-spacing: -1px; color: var(--text-main); }
+    .hero-title span { color: var(--primary-gold); font-style: italic; font-weight: 600; }
+    .hero-subtitle { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; line-height: 1.6; }
+    .hero-media-wrapper { max-width: 1200px; margin: 0 auto; border-radius: 24px; overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.4); border: 1px solid rgba(212,175,55,0.3); position: relative; aspect-ratio: 16/7; background-color: var(--bg-card); z-index: 2; transform: translateY(0); transition: transform 0.5s ease; }
+    .hero-media-wrapper:hover { transform: translateY(-10px); }
+    .hero-media-wrapper img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); transition: filter 0.5s ease, transform 0.8s ease; }
+    .hero-media-wrapper:hover img { filter: brightness(0.95); transform: scale(1.02); }
+    
+    .bento-section { padding: 120px 5%; background-color: var(--bg-main); position: relative; border-top: 1px solid rgba(255,255,255,0.05); }
+    .bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 280px; gap: 24px; max-width: 1200px; margin: 0 auto; }
+    .bento-card { border-radius: 24px; overflow: hidden; position: relative; transition: transform var(--transition), box-shadow var(--transition); background-color: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); }
+    [data-theme="light"] .bento-card { border: 1px solid rgba(0,0,0,0.1); }
+    .bento-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); border-color: rgba(212,175,55,0.4); }
+    .bento-large { grid-column: span 2; grid-row: span 2; padding: 40px; display: flex; flex-direction: column; justify-content: flex-end; }
+    .bento-wide { grid-column: span 2; padding: 40px; display: flex; align-items: center; gap: 30px; }
+    .bento-square { padding: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    
+    .stat-number { font-size: 4rem; color: var(--primary-gold); font-family: 'Poppins', sans-serif; line-height: 1; font-weight: 700; }
+    .stat-label { color: var(--text-muted); font-weight: 500; margin-top: 15px; font-size: 1.1rem; }
+    
+    .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; }
+    .program-card-modern { background-color: transparent; border-radius: 24px; overflow: hidden; position: relative; cursor: pointer; border: 1px solid rgba(255,255,255,0.05); transition: border-color var(--transition), transform var(--transition); }
+    [data-theme="light"] .program-card-modern { border: 1px solid rgba(0,0,0,0.1); }
+    .program-card-modern:hover { border-color: var(--primary-gold); transform: translateY(-5px); }
+    .program-img-wrap { width: 100%; aspect-ratio: 4/3; position: relative; overflow: hidden; }
+    .program-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
+    .program-card-modern:hover .program-img-wrap img { transform: scale(1.08); }
+    .program-content-modern { padding: 35px 30px; background-color: var(--bg-card); position: relative; margin-top: -20px; border-radius: 20px 20px 0 0; z-index: 2; transition: background var(--transition); border-top: 2px solid var(--primary-gold); }
+    .program-card-modern:hover .program-content-modern { background-color: rgba(255,255,255,0.03); }
+    [data-theme="light"] .program-card-modern:hover .program-content-modern { background-color: #f8fafc; }
+    
+    .testimonial-modern { max-width: 900px; margin: 0 auto; text-align: center; padding: 60px; background: rgba(212, 175, 55, 0.03); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 30px; position: relative; }
+    .quote-icon { font-size: 3rem; color: var(--primary-gold); opacity: 0.3; position: absolute; top: 40px; left: 40px; }
+    
+    @media (max-width: 1024px) {
+      .hero-title { font-size: 4rem; }
+      .bento-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 250px; }
+      .bento-large { grid-column: span 2; grid-row: span 1; }
+      .programs-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.2rem; }
+      .hero-modern { padding-top: 100px; padding-bottom: 40px; }
+      .hero-media-wrapper { aspect-ratio: 4/3; }
+      .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+      .bento-large, .bento-wide { grid-column: span 1; flex-direction: column; align-items: flex-start; text-align: left; min-height: 250px; }
+      .bento-square { min-height: 200px; }
+      .programs-grid { grid-template-columns: 1fr; }
+      .testimonial-modern { padding: 40px 20px; }
+      .quote-icon { top: 20px; left: 20px; font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="preloader"><div class="spinner"></div></div>
+
+  <header>
+    <a href="index.html" class="logo"><i class="fa-solid fa-graduation-cap"></i>Danfer<span>School</span></a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="academics.html">Academics</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="faculty.html">Faculty</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="admissions.html" class="btn btn-primary">Apply Now</a>
+    </div>
+    <button id="menuToggle" class="menu-toggle" aria-label="Open navigation menu" aria-controls="mobileMenu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+  </header>
+
+  <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
+    <button id="closeMenu" class="close-menu" aria-label="Close navigation menu"><i class="fa-solid fa-xmark"></i></button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="academics.html">Academics</a></li>
+      <li><a href="admissions.html">Admissions</a></li>
+      <li><a href="faculty.html">Faculty</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+  <div id="mobileOverlay" class="mobile-overlay" aria-hidden="true"></div>
+
+  <section class="hero-modern">
+    <div class="hero-glow"></div>
+    <div class="hero-content reveal">
+      
+      <div class="announcement-banner" style="background: rgba(212, 175, 55, 0.15); border: 1px solid var(--primary-gold); color: var(--text-main); padding: 8px 15px 8px 8px; border-radius: 30px; display: inline-flex; align-items: center; gap: 12px; margin-bottom: 40px; backdrop-filter: blur(5px); box-shadow: var(--shadow-soft);">
+        <span class="banner-tag" style="background: var(--primary-gold); color: #0f172a; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase;">Notice</span>
+        <span style="font-size: 0.95rem; font-weight: 500; color: inherit;">Enrollment for 2026-2027 is open. <a href="admissions.html" style="color: var(--primary-gold); font-weight: 600; margin-left: 5px; text-decoration: none;">Apply today <i class="fa-solid fa-arrow-right"></i></a></span>
+      </div>
+      
+      <h1 class="hero-title">Where potential meets <br><span>excellence.</span></h1>
+      <p class="hero-subtitle">A premium K-12 institution dedicated to developing global citizens equipped for the challenges of tomorrow.</p>
+      
+      <div class="hero-btns" style="display: flex; gap: 20px; justify-content: center; margin-bottom: 60px;">
+        <a href="admissions.html" class="btn btn-primary" style="padding: 15px 35px; font-size: 1.1rem;">Begin Application</a>
+        <a href="about.html" class="btn btn-secondary" style="padding: 15px 35px; font-size: 1.1rem; border-width: 2px;">Discover Danfer</a>
+      </div>
+    </div>
+    
+    <div class="hero-media-wrapper reveal stagger-2">
+      <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1920" alt="Danfer Campus" loading="lazy">
+    </div>
+  </section>
+
+  <section class="bento-section">
+    <div class="section-title reveal">
+      <h2>A Standard of <span>Distinction</span></h2>
+      <p>Discover the foundational pillars that make Danfer School a world-class educational experience.</p>
+    </div>
+    
+    <div class="bento-grid">
+      <!-- Large Card -->
+      <div class="bento-card bento-large reveal stagger-1">
+        <img src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=800" alt="Library" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.15; z-index: 0; filter: grayscale(50%);">
+        <div style="position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-card) 20%, transparent); z-index: 1;"></div>
+        <div style="position: relative; z-index: 2;">
+          <h3 style="font-size: 2.2rem; font-family: 'Playfair Display', serif; color: var(--primary-gold); margin-bottom: 15px;">Modern Facilities</h3>
+          <p style="color: var(--text-main); font-size: 1.1rem; max-width: 90%; line-height: 1.6;">State-of-the-art laboratories, interactive smart classrooms, and extensive sports complexes engineered specifically to inspire innovation.</p>
+        </div>
+      </div>
+      
+      <!-- Wide Medium Cards -->
+      <div class="bento-card bento-wide reveal stagger-2">
+        <div style="width: 80px; height: 80px; background: rgba(212,175,55,0.1); color: var(--primary-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; flex-shrink: 0;"><i class="fa-solid fa-globe"></i></div>
+        <div>
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 8px; color: var(--text-main);">Global Curriculum</h3>
+          <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.5;">Internationally recognized program preparing students for top universities worldwide.</p>
+        </div>
+      </div>
+      
+      <div class="bento-card bento-wide reveal stagger-3">
+        <div style="width: 80px; height: 80px; background: rgba(212,175,55,0.1); color: var(--primary-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; flex-shrink: 0;"><i class="fa-solid fa-chalkboard-user"></i></div>
+        <div>
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 8px; color: var(--text-main);">Expert Faculty</h3>
+          <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.5;">Highly qualified educators dedicated to the personalized success of every student.</p>
+        </div>
+      </div>
+      
+      <!-- Square Stat Cards -->
+      <div class="bento-card bento-square reveal stagger-2">
+        <h2 class="stat-number"><span class="counter-value" data-target="100">0</span>%</h2>
+        <p class="stat-label">University Acceptance</p>
+      </div>
+      
+      <div class="bento-card bento-square reveal stagger-3">
+        <h2 class="stat-number"><span class="counter-value" data-target="1200">0</span>+</h2>
+        <p class="stat-label">Enrolled Students</p>
+      </div>
+      
+      <div class="bento-card bento-wide reveal stagger-4" style="grid-column: span 2; background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, transparent 100%);">
+        <div>
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 8px; color: var(--primary-gold);">Since 1998</h3>
+          <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.5;">Developing leaders and shaping futures for over two decades.</p>
+        </div>
+        <div style="margin-left: auto;">
+          <a href="about.html" class="btn btn-secondary">Our History</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="programs" style="background-color: var(--bg-card); padding: 120px 5%; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+    <div class="section-title reveal">
+      <h2>Our <span>Academic Programs</span></h2>
+      <p>Comprehensive education spanning crucial developmental stages.</p>
+    </div>
+    
+    <div class="programs-grid">
+      <div class="program-card-modern reveal stagger-1" onclick="window.location.href='academics.html#kindergarten'">
+        <div class="program-img-wrap">
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" alt="Kindergarten">
+        </div>
+        <div class="program-content-modern">
+          <h3 style="font-size: 1.6rem; margin-bottom: 12px; color: var(--text-main); font-family: 'Playfair Display', serif;">Early Years <span style="color: var(--text-muted); font-size: 1rem; font-family: 'Poppins', sans-serif;">(K1-K3)</span></h3>
+          <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">Fostering curiosity and foundational social skills in a play-based environment.</p>
+          <span style="color: var(--primary-gold); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Discover <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </div>
+      
+      <div class="program-card-modern reveal stagger-2" onclick="window.location.href='academics.html#elementary'">
+        <div class="program-img-wrap">
+          <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800" alt="Elementary">
+        </div>
+        <div class="program-content-modern">
+          <h3 style="font-size: 1.6rem; margin-bottom: 12px; color: var(--text-main); font-family: 'Playfair Display', serif;">Elementary <span style="color: var(--text-muted); font-size: 1rem; font-family: 'Poppins', sans-serif;">(G1-G8)</span></h3>
+          <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">Building academic fundamentals while encouraging collaborative learning.</p>
+          <span style="color: var(--primary-gold); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Discover <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </div>
+      
+      <div class="program-card-modern reveal stagger-3" onclick="window.location.href='academics.html#highschool'">
+        <div class="program-img-wrap">
+          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800" alt="High School">
+        </div>
+        <div class="program-content-modern">
+          <h3 style="font-size: 1.6rem; margin-bottom: 12px; color: var(--text-main); font-family: 'Playfair Display', serif;">High School <span style="color: var(--text-muted); font-size: 1rem; font-family: 'Poppins', sans-serif;">(G9-G12)</span></h3>
+          <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">Rigorous university preparation with advanced placement courses.</p>
+          <span style="color: var(--primary-gold); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Discover <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" style="background-color: var(--bg-main); padding: 120px 5%;">
+    <div class="section-title reveal">
+      <h2>Voices of <span>Danfer</span></h2>
+      <p>Hear from our vibrant community of parents, students, and alumni.</p>
+    </div>
+    
+    <div class="testimonial-modern reveal stagger-1">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <div class="carousel-container" id="testimonialCarousel" style="position:relative; height: 180px;">
+        <div class="testimonial-slide active" style="transition: opacity 0.5s ease; position:absolute; width:100%; opacity:1; top:20px;">
+          <p style="font-size:1.4rem; font-style:italic; margin-bottom:30px; line-height:1.8; color: var(--text-main); font-family: 'Playfair Display', serif;">"The transformation we've seen in our daughter is remarkable. The teachers genuinely care about both academic progress and emotional well-being."</p>
+          <h4 style="color:var(--primary-gold); font-size:1.1rem; font-family:'Poppins', sans-serif; margin-bottom: 5px;">Sarah Jenkins</h4>
+          <span style="color:var(--text-muted); font-size:0.9rem;">Parent of Grade 4 Student</span>
+        </div>
+        <div class="testimonial-slide" style="transition: opacity 0.5s ease; position:absolute; width:100%; opacity:0; top:20px; pointer-events:none;">
+          <p style="font-size:1.4rem; font-style:italic; margin-bottom:30px; line-height:1.8; color: var(--text-main); font-family: 'Playfair Display', serif;">"Danfer didn't just prepare me for university exams; it taught me how to think critically and lead with empathy. I owe my success to this community."</p>
+          <h4 style="color:var(--primary-gold); font-size:1.1rem; font-family:'Poppins', sans-serif; margin-bottom: 5px;">Michael O.</h4>
+          <span style="color:var(--text-muted); font-size:0.9rem;">Class of 2024 Alumni (Stanford University)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="index.html" class="logo" style="margin-bottom:20px; font-size:1.5rem;">
+          <i class="fa-solid fa-graduation-cap"></i>
+          Danfer<span>School</span>
+        </a>
+        <p>Nurturing Excellence from Kindergarten to High School. Building the leaders of tomorrow through holistic education.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="academics.html">Academic Programs</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="gallery.html">Campus Gallery</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Info</h3>
+        <ul>
+          <li style="display:flex; gap:10px;"><i class="fa-solid fa-location-dot" style="color:var(--primary-gold); margin-top:5px;"></i> <span>123 Education Boulevard,<br>Cityville, ST 12345</span></li>
+          <li><i class="fa-solid fa-phone" style="margin-right:10px; color:var(--primary-gold);"></i> +2519******</li>
+          <li><i class="fa-solid fa-envelope" style="margin-right:10px; color:var(--primary-gold);"></i> admissions@danferschool.edu</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Newsletter</h3>
+        <p>Subscribe to receive updates on admissions and school events.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your email address" required>
+          <button title="Subscribe" type="submit" class="btn btn-primary" style="padding:12px 20px;"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Danfer School. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></button>
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.testimonial-slide');
+      let currentSlide = 0;
+      if(slides.length > 0) {
+        setInterval(() => {
+          slides[currentSlide].style.opacity = '0';
+          slides[currentSlide].style.pointerEvents = 'none';
+          currentSlide = (currentSlide + 1) % slides.length;
+          slides[currentSlide].style.opacity = '1';
+          slides[currentSlide].style.pointerEvents = 'auto';
+        }, 6000);
+      }
+    });
+  </script>
+</body>
+</html>

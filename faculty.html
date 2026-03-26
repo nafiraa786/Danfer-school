@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty & Staff | Danfer School</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .faculty-container { padding: 100px 5%; }
+    
+    .search-filter-section { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 50px; background-color: var(--bg-card); padding: 30px; border-radius: var(--radius); border: 1px solid var(--border-color); box-shadow: var(--shadow-soft); align-items: center; justify-content: space-between; }
+    
+    .search-box { position: relative; flex: 1; min-width: 250px; max-width: 400px; }
+    .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+    .search-input { width: 100%; padding: 15px 15px 15px 45px; border-radius: var(--radius); border: 1px solid var(--border-color); background-color: var(--bg-main); color: var(--text-main); font-family: 'Poppins', sans-serif; transition: border-color var(--transition); }
+    .search-input:focus { outline: none; border-color: var(--primary-gold); }
+    
+    .filter-group { display: flex; gap: 15px; flex-wrap: wrap; }
+    .filter-btn { padding: 10px 20px; border-radius: 30px; border: 1px solid var(--border-color); background-color: transparent; color: var(--text-main); cursor: pointer; transition: all var(--transition); font-weight: 500; font-family: 'Poppins', sans-serif; }
+    .filter-btn.active, .filter-btn:hover { background-color: var(--primary-gold); color: #0f172a; border-color: var(--primary-gold); }
+    
+    .faculty-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; }
+    
+    .faculty-card { background-color: var(--bg-card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border-color); transition: transform var(--transition), box-shadow var(--transition); text-align: center; display: flex; flex-direction: column; height: 100%; }
+    .faculty-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); border-color: var(--primary-gold); }
+    [data-theme="light"] .faculty-card:hover { box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+    
+    .faculty-img { width: 100%; height: 280px; object-fit: cover; border-bottom: 3px solid var(--primary-gold); margin-bottom: 20px; }
+    .faculty-info { padding: 0 25px 25px; flex-grow: 1; display: flex; flex-direction: column; }
+    .faculty-name { font-size: 1.4rem; margin-bottom: 5px; color: var(--text-main); font-family: 'Playfair Display', serif; font-weight: 700; }
+    .faculty-role { color: var(--primary-gold); font-size: 0.95rem; margin-bottom: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+    .faculty-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; flex-grow: 1; }
+    
+    .social-links { margin-top: 20px; display: flex; justify-content: center; gap: 15px; border-top: 1px solid var(--border-color); padding-top: 15px; }
+    .social-links a { color: var(--text-muted); transition: color var(--transition); }
+    .social-links a:hover { color: var(--primary-gold); }
+    
+    .no-results { display: none; text-align: center; width: 100%; padding: 50px; color: var(--text-muted); font-size: 1.2rem; grid-column: 1 / -1; }
+  </style>
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader"><div class="spinner"></div></div>
+
+  <!-- Header -->
+  <header>
+    <a href="index.html" class="logo"><i class="fa-solid fa-graduation-cap"></i>Danfer<span>School</span></a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="academics.html">Academics</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="faculty.html">Faculty</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="admissions.html" class="btn btn-primary">Apply Now</a>
+    </div>
+    <button id="menuToggle" class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu">
+    <button id="closeMenu" class="close-menu"><i class="fa-solid fa-xmark"></i></button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="academics.html">Academics</a></li>
+      <li><a href="admissions.html">Admissions</a></li>
+      <li><a href="faculty.html">Faculty</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Page Header -->
+  <div class="page-header" style="background: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1920') center/cover;">
+    <h1 class="reveal">Expert Faculty</h1>
+    <p class="reveal stagger-1">Meet the passionate educators shaping our students' futures.</p>
+    <div class="breadcrumbs reveal stagger-2">
+      <a href="index.html">Home</a> / <span>Faculty</span>
+    </div>
+  </div>
+
+  <section class="faculty-container">
+    <div class="search-filter-section reveal">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="facultySearch" class="search-input" placeholder="Search by name or subject...">
+      </div>
+      
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all">All Staff</button>
+        <button class="filter-btn" data-filter="leadership">Leadership</button>
+        <button class="filter-btn" data-filter="science">Science & Math</button>
+        <button class="filter-btn" data-filter="humanities">Humanities</button>
+        <button class="filter-btn" data-filter="arts">Arts & Sports</button>
+      </div>
+    </div>
+    
+    <div class="faculty-grid" id="facultyGrid">
+      
+      <!-- Faculty Item 1 -->
+      <div class="faculty-card reveal stagger-1" data-category="leadership">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600" alt="Dr. Eleanor Wright" class="faculty-img">
+        <div class="faculty-info">
+          <h3 class="faculty-name">Dr. Eleanor Wright</h3>
+          <span class="faculty-role">Principal</span>
+          <p class="faculty-desc">Ph.D. in Educational Leadership from Harvard. Over 20 years of experience in international education.</p>
+          <div class="social-links">
+            <a href="#"><i class="fa-solid fa-envelope"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Faculty Item 2 -->
+      <div class="faculty-card reveal stagger-2" data-category="science">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600" alt="James Harrison" class="faculty-img">
+        <div class="faculty-info">
+          <h3 class="faculty-name">James Harrison</h3>
+          <span class="faculty-role">Head of Science</span>
+          <p class="faculty-desc">M.Sc. in Physics. Passionate about robotics and aerospace engineering, leading our STEM initiatives.</p>
+          <div class="social-links">
+            <a href="#"><i class="fa-solid fa-envelope"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Faculty Item 3 -->
+      <div class="faculty-card reveal stagger-3" data-category="humanities">
+        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=600" alt="Sarah Jenkins" class="faculty-img">
+        <div class="faculty-info">
+          <h3 class="faculty-name">Sarah Jenkins</h3>
+          <span class="faculty-role">Literature & History</span>
+          <p class="faculty-desc">M.A. in English Literature. Helps students develop critical analysis and a deep appreciation for the written word.</p>
+          <div class="social-links">
+            <a href="#"><i class="fa-solid fa-envelope"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Faculty Item 4 -->
+      <div class="faculty-card reveal stagger-4" data-category="arts">
+        <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&q=80&w=600" alt="Marcus Chen" class="faculty-img">
+        <div class="faculty-info">
+          <h3 class="faculty-name">Marcus Chen</h3>
+          <span class="faculty-role">Visual Arts Director</span>
+          <p class="faculty-desc">Award-winning painter and sculptor. Encourages students to express their unique perspectives through mixed media.</p>
+          <div class="social-links">
+            <a href="#"><i class="fa-solid fa-envelope"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Faculty Item 5 -->
+      <div class="faculty-card reveal stagger-1" data-category="leadership">
+        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=600" alt="Robert Miller" class="faculty-img">
+        <div class="faculty-info">
+          <h3 class="faculty-name">Robert Miller</h3>
+          <span class="faculty-role">Vice Principal</span>
+          <p class="faculty-desc">M.Ed. in School Administration. Dedicated to student well-being and maintaining an inclusive campus culture.</p>
+          <div class="social-links">
+            <a href="#"><i class="fa-solid fa-envelope"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Faculty Item 6 -->
+      <div class="faculty-card reveal stagger-2" data-category="science">
+        <img src="https://images.unsplash.com/photo-1594824436998-efa5b6ad6925?auto=format&fit=crop&q=80&w=600" alt="Dr. Anita Patel" class="faculty-img">
+        <div class="faculty-info">
+          <h3 class="faculty-name">Dr. Anita Patel</h3>
+          <span class="faculty-role">Mathematics</span>
+          <p class="faculty-desc">Ph.D. in Applied Mathematics. Makes complex mathematical concepts accessible and engaging for all students.</p>
+          <div class="social-links">
+            <a href="#"><i class="fa-solid fa-envelope"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="no-results" id="noResultsMsg">
+        <i class="fa-solid fa-face-frown" style="font-size: 3rem; color: var(--border-color); margin-bottom: 15px; display: block;"></i>
+        No faculty members found matching your criteria.
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="index.html" class="logo" style="margin-bottom:20px; font-size:1.5rem;"><i class="fa-solid fa-graduation-cap"></i>Danfer<span>School</span></a>
+        <p>Nurturing Excellence from Kindergarten to High School. Building the leaders of tomorrow through holistic education.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="academics.html">Academic Programs</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="gallery.html">Campus Gallery</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Info</h3>
+        <ul>
+          <li style="display:flex; gap:10px;"><i class="fa-solid fa-location-dot" style="color:var(--primary-gold); margin-top:5px;"></i> <span>123 Education Boulevard,<br>Cityville, ST 12345</span></li>
+          <li><i class="fa-solid fa-phone" style="margin-right:10px; color:var(--primary-gold);"></i> +1 (555) 123-4567</li>
+          <li><i class="fa-solid fa-envelope" style="margin-right:10px; color:var(--primary-gold);"></i> admissions@danferschool.edu</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Newsletter</h3>
+        <p>Subscribe to receive updates.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit" class="btn btn-primary" style="padding:12px 20px;"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Danfer School. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></button>
+  <script src="js/script.js"></script>
+  
+  <script>
+    // Faculty Search Integration
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('facultySearch');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const facultyCards = document.querySelectorAll('.faculty-card');
+      const noResultsMsg = document.getElementById('noResultsMsg');
+      
+      let currentFilter = 'all';
+      let currentQuery = '';
+      
+      function filterFaculty() {
+        let visibleCount = 0;
+        
+        facultyCards.forEach(card => {
+          const name = card.querySelector('.faculty-name').innerText.toLowerCase();
+          const role = card.querySelector('.faculty-role').innerText.toLowerCase();
+          const desc = card.querySelector('.faculty-desc').innerText.toLowerCase();
+          const category = card.getAttribute('data-category');
+          
+          const matchesSearch = name.includes(currentQuery) || role.includes(currentQuery) || desc.includes(currentQuery);
+          const matchesCategory = currentFilter === 'all' || category === currentFilter;
+          
+          if (matchesSearch && matchesCategory) {
+            card.style.display = 'flex';
+            visibleCount++;
+            // Small animation reset for filtered elements
+            card.style.animation = 'none';
+            card.offsetHeight; /* trigger reflow */
+            card.style.animation = 'fadeInUp 0.5s ease forwards';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        if (visibleCount === 0) {
+          noResultsMsg.style.display = 'block';
+        } else {
+          noResultsMsg.style.display = 'none';
+        }
+      }
+      
+      searchInput.addEventListener('input', (e) => {
+        currentQuery = e.target.value.toLowerCase();
+        filterFaculty();
+      });
+      
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Remove active class from all
+          filterBtns.forEach(b => b.classList.remove('active'));
+          // Add active class to clicked
+          btn.classList.add('active');
+          
+          currentFilter = btn.getAttribute('data-filter');
+          filterFaculty();
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academics | Danfer School</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .program-section { padding: 100px 5%; display: flex; flex-wrap: wrap; gap: 60px; align-items: center; border-bottom: 1px solid var(--border-color); }
+    .program-section:nth-child(even) { flex-direction: row-reverse; background-color: var(--bg-card); }
+    .program-content { flex: 1; min-width: 300px; }
+    .program-image { flex: 1; min-width: 300px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-soft); position: relative; }
+    .program-image img { width: 100%; height: 450px; object-fit: cover; transition: transform 0.5s ease; border-radius: var(--radius); }
+    .program-image:hover img { transform: scale(1.05); }
+    .program-features { margin-top: 30px; list-style: none; padding: 0; }
+    .program-features li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 15px; color: var(--text-muted); font-size: 1.05rem; }
+    .program-features i { color: var(--primary-gold); margin-top: 5px; font-size: 1.2rem; }
+    .program-tag { display: inline-block; padding: 5px 15px; background-color: rgba(212, 175, 55, 0.1); color: var(--primary-gold); border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 15px; border: 1px solid var(--primary-gold); text-transform: uppercase; letter-spacing: 1px; }
+  </style>
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader"><div class="spinner"></div></div>
+
+  <!-- Header -->
+  <header>
+    <a href="index.html" class="logo"><i class="fa-solid fa-graduation-cap"></i>Danfer<span>School</span></a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="academics.html">Academics</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="faculty.html">Faculty</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="admissions.html" class="btn btn-primary">Apply Now</a>
+    </div>
+    <button id="menuToggle" class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu">
+    <button id="closeMenu" class="close-menu"><i class="fa-solid fa-xmark"></i></button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="academics.html">Academics</a></li>
+      <li><a href="admissions.html">Admissions</a></li>
+      <li><a href="faculty.html">Faculty</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Page Header -->
+  <div class="page-header" style="background: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=1920') center/cover;">
+    <h1 class="reveal">Academic Excellence</h1>
+    <p class="reveal stagger-1">A comprehensive learning journey from early years to graduation.</p>
+    <div class="breadcrumbs reveal stagger-2">
+      <a href="index.html">Home</a> / <span>Academics</span>
+    </div>
+  </div>
+
+  <!-- Kindergarten -->
+  <section id="kindergarten" class="program-section">
+    <div class="program-image reveal">
+      <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1000" alt="Kindergarten students classroom happy">
+    </div>
+    <div class="program-content reveal stagger-1">
+      <span class="program-tag">Ages 4-6</span>
+      <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-family: 'Playfair Display', serif;">Kindergarten <br><span style="color: var(--primary-gold); font-size: 1.8rem;">The Early Years</span></h2>
+      <p style="color: var(--text-main); font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">Our Kindergarten program is designed to spark a lifelong love of learning. We believe that play is the work of a child, and our classrooms reflect this philosophy by blending structured learning with imaginative exploration.</p>
+      
+      <ul class="program-features">
+        <li><i class="fa-solid fa-check-circle"></i> <span>Play-based, child-centered curriculum focused on holistic development.</span></li>
+        <li><i class="fa-solid fa-check-circle"></i> <span>Introduction to foundational literacy, numeracy, and scientific inquiry.</span></li>
+        <li><i class="fa-solid fa-check-circle"></i> <span>Creative expression through art, music, and dramatic play.</span></li>
+        <li><i class="fa-solid fa-check-circle"></i> <span>Small class sizes (1:12 ratio) ensuring individualized attention.</span></li>
+      </ul>
+      <a href="admissions.html" class="btn btn-secondary" style="margin-top: 20px;">Apply for Kindergarten</a>
+    </div>
+  </section>
+
+  <!-- Elementary -->
+  <section id="elementary" class="program-section">
+    <div class="program-image reveal">
+      <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=1000" alt="African students studying school">
+    </div>
+    <div class="program-content reveal stagger-1">
+      <span class="program-tag">Grades 1-5</span>
+      <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-family: 'Playfair Display', serif;">Elementary School <br><span style="color: var(--primary-green); font-size: 1.8rem;">Building Foundations</span></h2>
+      <p style="color: var(--text-main); font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">In Elementary school, students transition into more focused academic disciplines while continuing to develop critical thinking and problem-solving skills in a highly collaborative environment.</p>
+      
+      <ul class="program-features">
+        <li><i class="fa-solid fa-check-circle"></i> <span>Comprehensive core subjects: Language Arts, Mathematics, Science, and Social Studies.</span></li>
+        <li><i class="fa-solid fa-check-circle"></i> <span>Integrated STEM methodology with dedicated makerspace access.</span></li>
+        <li><i class="fa-solid fa-check-circle"></i> <span>Foreign language instruction starting in Grade 1 (Spanish or Mandarin).</span></li>
+        <li><i class="fa-solid fa-check-circle"></i> <span>Character education focusing on empathy, resilience, and global awareness.</span></li>
+      </ul>
+      <a href="admissions.html" class="btn btn-secondary" style="margin-top: 20px;">Apply for Elementary</a>
+    </div>
+  </section>
+
+  <!-- High School -->
+  <section id="highschool" class="program-section">
+    <div class="program-image reveal">
+      <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1000" alt="Teacher helping students">
+    </div>
+    <div class="program-content reveal stagger-1">
+      <span class="program-tag">Grades 6-12</span>
+      <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-family: 'Playfair Display', serif;">High School <br><span style="color: var(--primary-blue); font-size: 1.8rem;">Preparation for the Future</span></h2>
+      <p style="color: var(--text-main); font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">Our rigorous High School program is tailored to prepare students for the demands of top-tier universities and the rapid changes of the modern workforce, emphasizing leadership and academic excellence.</p>
+      
+      <ul class="program-features">
+        <li><i class="fa-solid fa-check-circle"></i> <span>Advanced Placement (AP) and International Baccalaureate (IB) options.</span></li>
+        <li><i class="fa-solid fa-check-circle"></i> <span>Extensive university counseling starting in Grade 9.</span></li>
+        <li><i class="fa-solid fa-check-circle"></i> <span>Capstone project requirements involving community service and research.</span></li>
+        <li><i class="fa-solid fa-check-circle"></i> <span>Over 40 extracurricular clubs, competitive athletics, and arts programs.</span></li>
+      </ul>
+      <a href="admissions.html" class="btn btn-secondary" style="margin-top: 20px;">Apply for High School</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="index.html" class="logo" style="margin-bottom:20px; font-size:1.5rem;"><i class="fa-solid fa-graduation-cap"></i>Danfer<span>School</span></a>
+        <p>Nurturing Excellence from Kindergarten to High School. Building the leaders of tomorrow through holistic education.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="academics.html">Academic Programs</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="gallery.html">Campus Gallery</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Info</h3>
+        <ul>
+          <li style="display:flex; gap:10px;"><i class="fa-solid fa-location-dot" style="color:var(--primary-gold); margin-top:5px;"></i> <span>123 Education Boulevard,<br>Cityville, ST 12345</span></li>
+          <li><i class="fa-solid fa-phone" style="margin-right:10px; color:var(--primary-gold);"></i> +1 (555) 123-4567</li>
+          <li><i class="fa-solid fa-envelope" style="margin-right:10px; color:var(--primary-gold);"></i> admissions@danferschool.edu</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Newsletter</h3>
+        <p>Subscribe to receive updates.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit" class="btn btn-primary" style="padding:12px 20px;"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Danfer School. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></button>
+  <script src="js/script.js"></script>
+</body>
+</html>

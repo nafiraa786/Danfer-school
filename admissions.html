@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admissions | Danfer School</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .admissions-container { display: flex; flex-wrap: wrap; gap: 60px; padding: 100px 5%; }
+    .admissions-info { flex: 1; min-width: 300px; }
+    .admissions-form-wrapper { flex: 1.2; min-width: 350px; background-color: var(--bg-card); padding: 50px; border-radius: var(--radius); border: 1px solid var(--border-color); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; }
+    
+    .form-group { margin-bottom: 25px; position: relative; }
+    .form-group label { display: block; margin-bottom: 10px; font-weight: 500; color: var(--text-main); font-size: 0.95rem; }
+    .form-control { width: 100%; padding: 15px; background-color: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius); color: var(--text-main); font-family: 'Poppins', sans-serif; transition: border-color var(--transition), box-shadow var(--transition); }
+    .form-control:focus { outline: none; border-color: var(--primary-gold); box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1); }
+    
+    .form-row { display: flex; gap: 20px; }
+    .form-row .form-group { flex: 1; }
+    
+    select.form-control { appearance: none; cursor: pointer; }
+    .select-wrapper { position: relative; }
+    .select-wrapper::after { content: '\f107'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+    
+    .error-text { color: var(--primary-red); font-size: 0.85rem; margin-top: 8px; display: none; position: absolute; bottom: -20px; left: 0; }
+    .form-group.error .form-control { border-color: var(--primary-red); }
+    .form-group.error .error-text { display: block; }
+    
+    /* Success Overlay */
+    .success-message { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-card); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; opacity: 0; visibility: hidden; transition: all 0.5s ease; z-index: 10; padding: 40px; }
+    .success-message.show { opacity: 1; visibility: visible; }
+    .success-icon { width: 90px; height: 90px; background-color: rgba(76, 175, 80, 0.1); color: var(--primary-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin-bottom: 25px; }
+    .success-message h3 { font-size: 2rem; color: var(--text-main); margin-bottom: 15px; }
+    .success-message p { color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem; }
+    
+    .step-list { margin-top: 40px; }
+    .step-item { display: flex; gap: 20px; margin-bottom: 30px; background-color: var(--bg-card); padding: 25px; border-radius: var(--radius); border: 1px solid var(--border-color); transition: transform var(--transition), border-color var(--transition); }
+    .step-item:hover { transform: translateX(10px); border-color: var(--primary-gold); }
+    .step-number { width: 50px; height: 50px; background-color: rgba(212, 175, 55, 0.1); color: var(--primary-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-family: 'Playfair Display', serif; font-size: 1.5rem; flex-shrink: 0; border: 1px solid var(--primary-gold); }
+    .step-content h4 { font-size: 1.3rem; margin-bottom: 10px; color: var(--text-main); }
+    .step-content p { color: var(--text-muted); font-size: 1rem; }
+    
+    @media (max-width: 768px) {
+      .form-row { flex-direction: column; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader"><div class="spinner"></div></div>
+
+  <!-- Header -->
+  <header>
+    <a href="index.html" class="logo"><i class="fa-solid fa-graduation-cap"></i>Danfer<span>School</span></a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="academics.html">Academics</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="faculty.html">Faculty</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="admissions.html" class="btn btn-primary">Apply Now</a>
+    </div>
+    <button id="menuToggle" class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu">
+    <button id="closeMenu" class="close-menu"><i class="fa-solid fa-xmark"></i></button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="academics.html">Academics</a></li>
+      <li><a href="admissions.html">Admissions</a></li>
+      <li><a href="faculty.html">Faculty</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Page Header -->
+  <div class="page-header" style="background: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=1920') center/cover;">
+    <h1 class="reveal">Admissions Process</h1>
+    <p class="reveal stagger-1">Join a community dedicated to educational excellence.</p>
+    <div class="breadcrumbs reveal stagger-2">
+      <a href="index.html">Home</a> / <span>Admissions</span>
+    </div>
+  </div>
+
+  <section class="admissions-container">
+    <div class="admissions-info reveal">
+      <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-family: 'Playfair Display', serif;">How to <span style="color: var(--primary-gold);">Apply</span></h2>
+      <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8;">We seek students who are curious, motivated, and eager to contribute to our vibrant community. Follow our streamlined admission process below.</p>
+      
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Submit Online Application</h4>
+            <p>Fill out the preliminary application form on this page with accurate parent and student details.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Campus Tour & Interview</h4>
+            <p>Once your application is reviewed, our admissions office will schedule a personal campus tour and a brief interview.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Assessment</h4>
+            <p>Depending on the grade level, candidates may be required to complete a standardized assessment or submit recent academic records.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h4>Enrollment Decision</h4>
+            <p>You will receive a formal decision letter within two weeks of completing the assessment and interview process.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="admissions-form-wrapper reveal stagger-1">
+      <h3 style="font-size: 1.8rem; margin-bottom: 30px; font-family: 'Playfair Display', serif; text-align: center; border-bottom: 1px solid var(--border-color); padding-bottom: 20px;">Preliminary Application</h3>
+      
+      <form id="admissionsForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">Parent First Name</label>
+            <input type="text" id="firstName" class="form-control" autocomplete="off">
+            <span class="error-text">First name is required</span>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Parent Last Name</label>
+            <input type="text" id="lastName" class="form-control" autocomplete="off">
+            <span class="error-text">Last name is required</span>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" class="form-control" autocomplete="off">
+            <span class="error-text">Valid email is required</span>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" class="form-control" autocomplete="off">
+            <span class="error-text">Valid phone is required</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="studentName">Student Full Name</label>
+          <input type="text" id="studentName" class="form-control" autocomplete="off">
+          <span class="error-text">Student name is required</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="grade">Grade Applying For</label>
+          <div class="select-wrapper">
+            <select id="grade" class="form-control">
+              <option value="" disabled selected>Select Grade</option>
+              <option value="kindergarten">Kindergarten (K1-K3)</option>
+              <option value="elementary">Elementary (G1-G5)</option>
+              <option value="highschool">High School (G6-G12)</option>
+            </select>
+          </div>
+          <span class="error-text">Please select a grade</span>
+        </div>
+        
+        <div class="form-group" style="margin-bottom: 30px;">
+          <label for="message">Additional Information (Optional)</label>
+          <textarea id="message" class="form-control" rows="4" style="resize: vertical;"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 15px;">Submit Application</button>
+      </form>
+      
+      <!-- Success UI Message (Hidden by default) -->
+      <div id="successMessage" class="success-message">
+        <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+        <h3>Application Received!</h3>
+        <p>Thank you for choosing Danfer School. Our admissions team will contact you within 48 hours to schedule your campus tour.</p>
+        <button id="resetFormBtn" class="btn btn-secondary">Submit Another Application</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="index.html" class="logo" style="margin-bottom:20px; font-size:1.5rem;"><i class="fa-solid fa-graduation-cap"></i>Danfer<span>School</span></a>
+        <p>Nurturing Excellence from Kindergarten to High School. Building the leaders of tomorrow through holistic education.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="academics.html">Academic Programs</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="gallery.html">Campus Gallery</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Info</h3>
+        <ul>
+          <li style="display:flex; gap:10px;"><i class="fa-solid fa-location-dot" style="color:var(--primary-gold); margin-top:5px;"></i> <span>123 Education Boulevard,<br>Cityville, ST 12345</span></li>
+          <li><i class="fa-solid fa-phone" style="margin-right:10px; color:var(--primary-gold);"></i> +1 (555) 123-4567</li>
+          <li><i class="fa-solid fa-envelope" style="margin-right:10px; color:var(--primary-gold);"></i> admissions@danferschool.edu</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Newsletter</h3>
+        <p>Subscribe to receive updates.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit" class="btn btn-primary" style="padding:12px 20px;"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Danfer School. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></button>
+  <script src="js/script.js"></script>
+  
+  <script>
+    // Form Validation Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('admissionsForm');
+      const inputs = [
+        { id: 'firstName', type: 'text' },
+        { id: 'lastName', type: 'text' },
+        { id: 'email', type: 'email' },
+        { id: 'phone', type: 'phone' },
+        { id: 'studentName', type: 'text' },
+        { id: 'grade', type: 'select' }
+      ];
+      
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let isValid = true;
+        
+        inputs.forEach(inputDef => {
+          const element = document.getElementById(inputDef.id);
+          const formGroup = element.closest('.form-group');
+          const value = element.value.trim();
+          
+          let hasError = false;
+          
+          if (!value) {
+            hasError = true;
+          } else if (inputDef.type === 'email') {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) hasError = true;
+          }
+          
+          if (hasError) {
+            formGroup.classList.add('error');
+            isValid = false;
+          } else {
+            formGroup.classList.remove('error');
+          }
+        });
+        
+        if (isValid) {
+          // Simulate API call and show success
+          const btn = form.querySelector('button[type="submit"]');
+          const originalText = btn.innerHTML;
+          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+          btn.disabled = true;
+          
+          setTimeout(() => {
+            document.getElementById('successMessage').classList.add('show');
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            form.reset();
+          }, 1500);
+        }
+      });
+      
+      // Remove class error on input
+      inputs.forEach(inputDef => {
+        const element = document.getElementById(inputDef.id);
+        element.addEventListener('input', () => {
+          element.closest('.form-group').classList.remove('error');
+        });
+        element.addEventListener('change', () => {
+          element.closest('.form-group').classList.remove('error');
+        });
+      });
+      
+      // Reset Form Button
+      document.getElementById('resetFormBtn').addEventListener('click', () => {
+        document.getElementById('successMessage').classList.remove('show');
+      });
+    });
+  </script>
+</body>
+</html>

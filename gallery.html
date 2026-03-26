@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Gallery | Danfer School</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .gallery-container { padding: 100px 5%; }
+    
+    .gallery-filters { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap; }
+    .filter-btn { padding: 12px 25px; border-radius: 30px; border: 1px solid var(--primary-gold); background-color: transparent; color: var(--text-main); cursor: pointer; transition: all var(--transition); font-weight: 500; font-family: 'Poppins', sans-serif; font-size: 1rem; }
+    .filter-btn.active, .filter-btn:hover { background-color: var(--primary-gold); color: #0f172a; }
+    
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+    
+    .gallery-item { border-radius: var(--radius); overflow: hidden; position: relative; cursor: pointer; height: 260px; box-shadow: var(--shadow-soft); transition: transform var(--transition); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
+    .gallery-item:hover img { transform: scale(1.1); }
+    
+    .gallery-overlay { position: absolute; inset: 0; background-color: rgba(15, 23, 42, 0.85); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity var(--transition); padding: 20px; text-align: center; }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay i { font-size: 2.5rem; color: var(--primary-gold); margin-bottom: 15px; transform: translateY(20px); transition: transform 0.4s ease; }
+    .gallery-overlay h3 { color: #fff; font-family: 'Playfair Display', serif; font-size: 1.3rem; transform: translateY(20px); transition: transform 0.4s ease 0.1s; }
+    .gallery-item:hover .gallery-overlay i, .gallery-item:hover .gallery-overlay h3 { transform: translateY(0); }
+    
+    /* Lightbox Modal */
+    .lightbox { position: fixed; inset: 0; background-color: rgba(11, 17, 32, 0.95); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.4s ease;-webkit-backdrop-filter: blur(10px); ;backdrop-filter: blur(10px); }
+    .lightbox.show { opacity: 1; visibility: visible; }
+    .lightbox-content { max-width: 85%; max-height: 85%; position: relative; }
+    .lightbox-img { width: 100%; max-height: 85vh; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.4s ease; }
+    .lightbox.show .lightbox-img { transform: scale(1); }
+    .lightbox-caption { position: absolute; bottom: -40px; left: 0; width: 100%; text-align: center; color: var(--primary-gold); font-family: 'Playfair Display', serif; font-size: 1.2rem; }
+    
+    .lightbox-close { position: absolute; top: 10px; right: 10px; color: #fff; font-size: 2rem; cursor: pointer; transition: color var(--transition); background: rgba(0,0,0,0.5); border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2001;}
+    .lightbox-close:hover { color: var(--primary-gold); background: rgba(0,0,0,0.8); }
+  </style>
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader"><div class="spinner"></div></div>
+
+  <!-- Header -->
+  <header>
+    <a href="index.html" class="logo"><i class="fa-solid fa-graduation-cap"></i>Danfer<span>School</span></a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="academics.html">Academics</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+        <li><a href="faculty.html">Faculty</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="admissions.html" class="btn btn-primary">Apply Now</a>
+    </div>
+    <button title="Toggle Menu" id="menuToggle" class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu">
+    <button title="Close Menu" id="closeMenu" class="close-menu"><i class="fa-solid fa-xmark"></i></button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="academics.html">Academics</a></li>
+      <li><a href="admissions.html">Admissions</a></li>
+      <li><a href="faculty.html">Faculty</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Page Header -->
+  <div class="page-header" style="background: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=1920') center/cover;">
+    <h1 class="reveal">Campus Gallery</h1>
+    <p class="reveal stagger-1">A glimpse into life at Danfer School.</p>
+    <div class="breadcrumbs reveal stagger-2">
+      <a href="index.html">Home</a> / <span>Gallery</span>
+    </div>
+  </div>
+
+  <section class="gallery-container">
+    <div class="gallery-filters reveal">
+      <button class="filter-btn active" data-filter="all">All Photos</button>
+      <button class="filter-btn" data-filter="campus">Campus</button>
+      <button class="filter-btn" data-filter="students">Students</button>
+      <button class="filter-btn" data-filter="events">Events</button>
+      <button class="filter-btn" data-filter="sports">Sports</button>
+    </div>
+    
+    <div class="gallery-grid" id="galleryGrid">
+      
+      <!-- Gallery Item 1 -->
+      <div class="gallery-item reveal stagger-1" data-category="campus" data-src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=1200" data-caption="Main Library Building">
+        <img src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=600" alt="Main Library Building" loading="lazy">
+        <div class="gallery-overlay">
+          <i class="fa-solid fa-magnifying-glass-plus"></i>
+          <h3>Main Library</h3>
+        </div>
+      </div>
+      
+      <!-- Gallery Item 2 -->
+      <div class="gallery-item reveal stagger-2" data-category="students" data-src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=1200" data-caption="Elementary Students at Work">
+        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=600" alt="Elementary Students at Work" loading="lazy">
+        <div class="gallery-overlay">
+          <i class="fa-solid fa-magnifying-glass-plus"></i>
+          <h3>Collaborative Learning</h3>
+        </div>
+      </div>
+      
+      <!-- Gallery Item 3 -->
+      <div class="gallery-item reveal stagger-3" data-category="sports" data-src="https://images.unsplash.com/photo-1526676537331-79af7df506bf?auto=format&fit=crop&q=80&w=1200" data-caption="Annual Sports Day">
+        <img src="https://images.unsplash.com/photo-1526676537331-79af7df506bf?auto=format&fit=crop&q=80&w=600" alt="Annual Sports Day" loading="lazy">
+        <div class="gallery-overlay">
+          <i class="fa-solid fa-magnifying-glass-plus"></i>
+          <h3>Annual Sports Day</h3>
+        </div>
+      </div>
+      
+      <!-- Gallery Item 4 -->
+      <div class="gallery-item reveal stagger-4" data-category="events" data-src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=1200" data-caption="Science Fair Exhibition">
+        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=600" alt="Science Fair Exhibition" loading="lazy">
+        <div class="gallery-overlay">
+          <i class="fa-solid fa-magnifying-glass-plus"></i>
+          <h3>Science Fair Fair</h3>
+        </div>
+      </div>
+      
+      <!-- Gallery Item 5 -->
+      <div class="gallery-item reveal stagger-1" data-category="campus" data-src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1200" data-caption="Modern Science Lab">
+        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=600" alt="Modern Science Lab" loading="lazy">
+        <div class="gallery-overlay">
+          <i class="fa-solid fa-magnifying-glass-plus"></i>
+          <h3>Science Laboratory</h3>
+        </div>
+      </div>
+      
+      <!-- Gallery Item 6 -->
+      <div class="gallery-item reveal stagger-2" data-category="students" data-src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1200" data-caption="Kindergarten Art Class">
+        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=600" alt="Kindergarten Art Class" loading="lazy">
+        <div class="gallery-overlay">
+          <i class="fa-solid fa-magnifying-glass-plus"></i>
+          <h3>Art Class</h3>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose"><i class="fa-solid fa-xmark"></i></button>
+      <img src="" alt="Gallery Image" class="lightbox-img" id="lightboxImg">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="index.html" class="logo" style="margin-bottom:20px; font-size:1.5rem;"><i class="fa-solid fa-graduation-cap"></i>Danfer<span>School</span></a>
+        <p>Nurturing Excellence from Kindergarten to High School. Building the leaders of tomorrow through holistic education.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="academics.html">Academic Programs</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="gallery.html">Campus Gallery</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Info</h3>
+        <ul>
+          <li style="display:flex; gap:10px;"><i class="fa-solid fa-location-dot" style="color:var(--primary-gold); margin-top:5px;"></i> <span>123 Education Boulevard,<br>Cityville, ST 12345</span></li>
+          <li><i class="fa-solid fa-phone" style="margin-right:10px; color:var(--primary-gold);"></i> +1 (555) 123-4567</li>
+          <li><i class="fa-solid fa-envelope" style="margin-right:10px; color:var(--primary-gold);"></i> admissions@danferschool.edu</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Newsletter</h3>
+        <p>Subscribe to receive updates.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your email address" required>
+          <button title="send" type="submit" class="btn btn-primary" style="padding:12px 20px;"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Danfer School. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Back to Top"><i class="fa-solid fa-arrow-up"></i></button>
+  <script src="js/script.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Gallery Filter
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          const filterValue = btn.getAttribute('data-filter');
+          
+          galleryItems.forEach(item => {
+            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+              item.style.display = 'block';
+              item.style.animation = 'none';
+              item.offsetHeight; // trigger reflow
+              item.style.animation = 'fadeInUp 0.5s ease forwards';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+      
+      // Lightbox Logic
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const lightboxClose = document.getElementById('lightboxClose');
+      
+      galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const src = item.getAttribute('data-src');
+          const caption = item.getAttribute('data-caption');
+          
+          lightboxImg.src = src;
+          lightboxCaption.innerText = caption;
+          lightbox.classList.add('show');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+      
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('show')) {
+          closeLightbox();
+        }
+      });
+      
+      function closeLightbox() {
+        lightbox.classList.remove('show');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html>
